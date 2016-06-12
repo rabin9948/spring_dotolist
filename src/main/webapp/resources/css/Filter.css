@@ -1,0 +1,53 @@
+
+#filter input[class*="item"]{
+    max-width:16%;
+
+    width:30px;
+    height:30px;
+}
+
+#filter .item[color="class1"] {
+    background-color: red;
+}
+
+#filter .item[color="class2"]{
+    background-color: orange;
+}
+
+#filter .item[color="class3"]{
+    background-color: yellow;
+}
+
+#filter .item[color="class4"]{
+    background-color: green;
+}
+
+#filter .item[color="class5"]{
+    background-color: blue;
+}
+
+#filter .item[color="class6"]{
+    background-color: navy;
+}
+
+#filter .item[color="class7"]{
+    background-color: purple;
+}
+
+
+
+#filter #1{
+    color: black;
+}
+
+#filter .notice{
+
+}
+
+
+#filter{
+    background-color: rgba(255,255,255,0.6);
+    padding:2%;
+    border-radius: 2%;
+    margin:3% 3%;
+}

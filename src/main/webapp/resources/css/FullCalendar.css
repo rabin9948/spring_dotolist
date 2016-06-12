@@ -1,0 +1,39 @@
+#calendar .class1{
+    background-color: red;
+}
+
+#calendar .class2{
+    background-color: orange;
+}
+
+#calendar .class3{
+    background-color: yellow;
+}
+
+#calendar .class4{
+    background-color: green;
+}
+
+#calendar .class5{
+    background-color: blue;
+}
+
+#calendar .class6{
+    background-color: navy;
+}
+
+#calendar .class7{
+    background-color: purple;
+}
+
+#calendar #1{
+    color: black;
+}
+
+#calendar{
+    background-color: rgba(255,255,255,0.6);
+    padding:2%;
+    border-radius: 2%;
+    margin:3% 3%;
+    overflow: hidden;
+}

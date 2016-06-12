@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midas.mapper.TestMapper">
+
+    <select id="getTime" resultType="string">
+        SELECT now()
+    </select>
+
+    <insert id="insertTest">
+        INSERT INTO crud_test (name, password)
+        VALUES (#{name}, #{password})
+    </insert>
+
+    <select id="readTest" resultType="com.midas.domain.TestVO">
+        SELECT name, password
+        FROM crud_test
+        WHERE name = #{name}
+    </select>
+
+    <update id="updateTest">
+        UPDATE crud_test
+        SET name = #{name}
+        WHERE name = #{sname}
+    </update>
+
+    <delete id="deleteTest">
+        DELETE FROM crud_test
+        WHERE name = #{name}
+    </delete>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midas.mapper.UserMapper">
+    <select id="login" resultType="UserVO">
+        SELECT uid, id, password, email
+        from user
+        where id = #{id} and password = #{password}
+    </select>
+
+    <update id="upMember">
+        update user set password = #{password}, email = #{email}
+        where id = #{id}
+    </update>
+
+    <select id="re_user" resultType="UserVO">
+        SELECT * from user
+        where id= #{id}
+    </select>
+
+    <select id="loginCheck" resultType="int">
+        SELECT count(uid)
+        FROM user
+        WHERE id = #{id} and password = #{password}
+    </select>
+
+    <update id="keepLogin">
+        update user set sessionkey = #{sessionId}, sessionlimit = #{next}
+        where id = #{id}
+    </update>
+
+    <select id="checkUserWithSessionKey" resultType="UserVO">
+        SELECT * from user
+        where sessionkey = #{value} and sessionlimit > now()
+    </select>
+
+    <insert id="newMember" >
+        INSERT INTO user (id, password,email)
+        VALUES (#{id}, #{password},#{email})
+    </insert>
+
+    <select id="idCheck" resultType="int">
+        SELECT count(uid)
+        FROM user
+        WHERE id = #{id}
+    </select>
+</mapper>

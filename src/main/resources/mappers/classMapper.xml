@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midas.mapper.ClassMapper">
+    <insert id="createClass">
+        INSERT INTO user_class(uid, cid)
+        VALUES (#{uid}, #{cid})
+    </insert>
+
+    <select id="readAllClass" resultType="classVO">
+        SELECT * FROM class
+        WHERE cid IN (
+          SELECT cid
+          FROM user_class
+          WHERE uid = #{uid}
+        )
+    </select>
+
+    <delete id="deleteClass">
+        DELETE FROM user_class
+        WHERE uid = #{uid} AND cid = #{cid}
+    </delete>
+
+</mapper>

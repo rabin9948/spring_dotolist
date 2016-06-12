@@ -1,0 +1,56 @@
+body{
+    position: relative;
+    height: 100%;
+    background-image: url("../img/background.jpg");
+    background-size: cover;
+    overflow: auto;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+@media screen and (min-width: 480px) {
+    body{
+        background-color: red;
+    }
+}
+
+@media screen and (min-width: 760px) {
+    body{
+        background-color: yellow;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    body{
+        background-color: blue;
+    }
+
+    #calendar{
+        position: absolute;
+        right:0.3%;
+    }
+
+    body {
+        margin: 5px 5px;
+        padding: 0;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        font-size: 14px;
+    }
+
+    #calendar {
+        max-width: 75%;
+        max-height:90%;
+        margin: 0 auto;
+    }
+
+    #filter{
+        max-width:18%;
+        margin:0.5% 0.5%;
+        padding:0.5%;
+    }
+
+    #todoList{
+        max-width:18%;
+        margin:0.5% 0.5%;
+        padding:0.5%;
+    }
+}

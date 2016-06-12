@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midas.mapper.TeamMapper">
+
+    <insert id="newTeam" parameterType="com.midas.domain.TeamVO" useGeneratedKeys="true" keyProperty="tid">
+        INSERT INTO team (team_name)
+        VALUES (#{team_name})
+    </insert>
+
+    <delete id="deleteTeam">
+        DELETE FROM team
+        WHERE tid = #{tid}
+    </delete>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midas.mapper.ListMapper">
+    <insert id="createList">
+        INSERT INTO list(uid, tid, list_name, start_time, end_time, location, memo, privacy)
+        VALUES (#{uid}, #{tid}, #{list_name}, #{start_time}, #{end_time}, #{location}, #{memo}, #{privacy})
+    </insert>
+
+    <select id="readAllList" resultType="listVO">
+        SELECT * FROM list
+        WHERE uid = #{uid}
+    </select>
+
+    <update id="updateList">
+        UPDATE list
+        SET list_name = #{list_name}, start_time = #{start_time},
+            end_time = #{end_time}, location = #{location},
+            memo = #{memo}, privacy = #{privacy}
+        WHERE lid = #{lid}
+    </update>
+
+    <delete id="deleteList">
+        DELETE FROM list
+        WHERE lid = #{lid}
+    </delete>
+
+</mapper>

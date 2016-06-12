@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link href='/resources/css/fullcalendar/fullcalendar.css' rel='stylesheet' />
+	<link href='/resources/css/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+	<link href='/resources/css/FullCalendar.css' rel='stylesheet'/>
+	<link href='/resources/css/Filter.css' rel='stylesheet'/>
+	<link href='/resources/css/home.css' rel='stylesheet'/>
+
+	<script src='/resources/js/moment.min.js'></script>
+	<script src='/resources/js/jquery.min.js'></script>
+	<script src='/resources/js/fullcalendar/fullcalendar.min.js'></script>
+	<script src='/resources/js/jquery-ui.js'></script>
+
+	<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+
+
+	.absolute{
+		position: absolute;
+	}
+
+	.info{
+		width:200px;
+		height:100px;
+		background-color: white;
+		z-index: 999999;
+		-webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+		padding:15px;
+	}
+
+</style>
+</head>
+<body>
+
+	<div id="inputDialog" class="hidden absolute info">
+		<input type="text" id="title" placeholder="제목"/>
+		<p id="datetime"></p>
+		<input type="text" placeholder="팀원"/><br>
+		<input type="button" id="btnCreate" value="create"/>
+		<input type="button" id="btnCancel" value="cancel"/>
+	</div>
+
+
+
+	<div id='calendar'></div>
+
+	<input type='button' id='btnAddEvent' value = 'addEvent'/>
+
+	<input type='text' id='search'/>
+
+	<div id="filter">
+		<input type='button' class='item' color="class1" />
+		<input type='button' class='item' color="class2" />
+		<input type='button' class='item' color="class3" />
+		<input type='button' class='item' color="class4" />
+		<input type='button' class='item' color="class5" />
+		<input type='button' class='item' color="class6" />
+		<input type='button' class='item' color="class7" />
+	</div>
+
+	<div id='todoList'>
+		<h4>Draggable Events</h4>
+		<div class='fc-event'>My Event 1</div>
+		<div class='fc-event'>My Event 2</div>
+		<div class='fc-event'>My Event 3</div>
+		<div class='fc-event'>My Event 4</div>
+		<div class='fc-event'>My Event 5</div>
+		<p>
+			<input type='checkbox' id='drop-remove' />
+			<label for='drop-remove'>remove after drop</label>
+		</p>
+	</div>
+
+
+	<script src="/resources/js/inputDialog.js"></script>
+	<script src="/resources/js/FullCalendar.js"></script>
+	<script src="/resources/js/todoList.js"></script>
+
+	<script>
+
+		dom = $('#calendar');
+		app = {
+
+			inputDialog : InputDialog(),
+			calendar : FullCalendar(),
+			todoList : TodoList(),
+			eventsData : [
+				{
+					id:'1',
+					className:'class1',
+					title: 'All Day Event',
+					start: '2016-05-01',
+
+				},
+				{
+					id:'1',
+					className:'class2',
+					title: 'Long Event',
+					start: '2016-05-07',
+					end: '2016-05-10'
+				},
+				{
+					id:'1',
+					className:'class3',
+					title: 'Repeating Event',
+					start: '2016-05-09T16:00:00'
+				},
+				{
+					id:'1',
+					className:'class4',
+					title: 'Repeating Event',
+					start: '2016-05-16T16:00:00'
+				},
+				{
+					title: 'Conference',
+					start: '2016-05-11',
+					end: '2016-05-13'
+				},
+				{
+					title: 'Meeting',
+					start: '2016-05-12T10:30:00',
+					end: '2016-05-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2016-05-12T12:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2016-05-12T14:30:00'
+				},
+				{
+					title: 'Happy Hour',
+					start: '2016-05-12T17:30:00'
+				},
+				{
+					title: 'Dinner',
+					start: '2016-05-12T20:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2016-05-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2016-05-28'
+				}
+			],
+			oldeventsData : null
+		}
+
+		app.oldeventsData = jQuery.extend(true, {}, app.eventsData);;
+		app.inputDialog.init();
+		app.todoList.init();
+
+		app.calendar.init(app.eventsData);
+		setInterval(function(){
+
+			if(app.eventsData != app.oldeventsData){
+				app.calendar.init(app.eventsData);
+				app.oldeventsData = app.eventsData;
+			}
+		}, 2000);
+
+		app.eventsData.push({"title":"abcd", "start":"2016-05-23", "end":"2016-05-24"});
+		console.log(app.eventsData);
+		//app.calendar.insertClass("History", "2016-03-09", '2016-06-09', 14, 16);
+
+		//$("#inputDialog").fadeOut(300);
+		$("#filter .item").click(function(){
+			app.calendar.filter($(this).attr("color"));
+		});
+
+
+
+
+		function ajaxGetJson(_url) {
+//			$.post( _url, function( data ) {
+//				console.log(data);
+//			});
+
+			var data = [{
+				"uid": 4,
+				"lid": 1,
+				"start": "",
+				"className": "class1",
+				"end": "",
+				"title": "sadfsd",
+				"type": 0,
+				"tid": 1
+			}];
+
+			return data;
+		}
+
+
+
+		//받아온 데이터 분석
+		function parsingDataArray(_data){
+			for(var i=0; i<_data.length; i++){
+				var item = _data[i];
+
+				if(item.tid == 1){
+					app.calendar.insertClass(item.title,"2016-03-01", '2016-06-09', 14, 16, item.className);
+				}
+
+				else if(item.tid==2){
+
+				}
+
+				else if(item.tid ==0){
+
+				}
+
+			}
+		}
+
+		parsingDataArray(
+				ajaxGetJson("http://192.168.0.3:8080/list/4"));
+
+
+	</script>
+</body>
+</html>
